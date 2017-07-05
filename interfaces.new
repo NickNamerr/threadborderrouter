@@ -1,0 +1,73 @@
+
+# SILICON_LABS_BORDER_ROUTER_DOCUMENTATION
+# The loopback interface is used extensively by the Linux networking stack.
+# these interfaces are required for both IPv4 and IPv6 and their modification
+# may cause networking to behave unpredictably.
+# SILICON_LABS_BORDER_ROUTER_DOCUMENTATION
+auto lo
+iface lo inet loopback
+iface lo inet6 loopback
+
+# SILICON_LABS_BORDER_ROUTER_DOCUMENTATION
+# This setting allows the hotplug subsystem to construct the wlan0 and eth0
+# interfaces after their link becomes available 
+# (eg: when a cable is plugged into Eth0, or the WiFi dongle is inserted)
+# SILICON_LABS_BORDER_ROUTER_DOCUMENTATION
+allow-hotplug wlan0 eth0
+
+# SILICON_LABS_BORDER_ROUTER_DOCUMENTATION
+# ETH0 - the 'internet-facing' interface
+#   The silabs-border-router package configures this interface
+#   to anticipate a connected route exists to the IPv6 internet.
+#   The dhcp client daemon will request and obtain an IPv4 and IPv6
+#   address for this interface dynamically.
+#   Additionally, the dhcp client daemon will transmit Prefix Request Messages
+#   to Delegating Routers on the eth0 interface on behalf of the host 
+#   and mesh interfaces
+# SILICON_LABS_BORDER_ROUTER_DOCUMENTATION
+auto eth0
+iface eth0 inet dhcp
+iface eth0 inet6 dhcp
+
+# SILICON_LABS_BORDER_ROUTER_DOCUMENTATION
+# WLAN0 - the 'WiFi' interface
+#   The silabs-border-router package configures this interface
+#   to enable the operation of a Wireless Access Point.
+#   The silabs-border-router also configures a DHCP server to 
+#   clients connecting to the Wireless Access Point with IPv4/6 addresses.
+#   In order to behave as an IPv4/6 DHCP server for the Wireless Access Point,
+#   a static address is required for both IPv4 and IPv6 on wlan0
+#
+#   Due to IPv4 address depletion, IPv4 routing requires NAT44 to be enabled
+#   the 'up' command below loads iptables rules that will configure NAT44 for
+#   the Border Router's interfaces
+#
+#   If your application does not require a wireless access point,
+#   this interface may be safely omitted
+# SILICON_LABS_BORDER_ROUTER_DOCUMENTATION
+auto wlan0
+iface wlan0 inet static
+  address 192.168.42.1
+  netmask 255.255.255.0
+  up iptables-restore < /etc/iptables.ipv4.nat
+
+# SILICON_LABS_BORDER_ROUTER_DOCUMENTATION
+# Because multiple daemons within the Border Router reference the HOST_PREFIX,
+# it is defined in /etc/siliconlabs/border-router.conf The post-up and 
+# post-down commands, which are called after the interface
+# is defined or undefined, execude commands to read this file. The awk 
+# command searches the configuration file for the 
+# HOST_SUBNET variable, and uses the value of HOST_SUBNET::1/SUBNET_WIDTH as
+# the IPv6 address for the wlan0 interface. The derived address is added to 
+# the interface after wlan0 is created, and removed from the interface after 
+# it is destroyed
+#
+# This interface must use the 'manual' method because the 'static' method
+# causes the DHCP server to require a subnet be defined in this file, rather than
+# allowing it to be derived from a configuration file after the interface is
+# defined
+#
+# SILICON_LABS_BORDER_ROUTER_DOCUMENTATION
+iface wlan0 inet6 manual
+  post-up ip -6 addr add `awk -v key="HOST_SUBNET" '$1==key { gsub("::/","::1/"); print $2 }' /etc/siliconlabs/border-router.conf | uniq` dev wlan0
+  post-down ip -6 addr del `awk -v key="HOST_SUBNET" '$1==key { gsub("::.*","::1"); print $2 }' /etc/siliconlabs/border-router.conf | uniq` dev wlan0

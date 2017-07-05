@@ -1,0 +1,184 @@
+@import './semantic-ui/semantic';
+@import (inline) "node_modules/semantic-ui-transition/transition.css";
+
+@primary-blue: #51d6ff;
+@darker-blue: #29a4ff;
+@dark-gray: #313131;
+@darker-gray: #222222;
+@gray-blue: #e8ebef;
+@light-gray-blue: #f8fbff;
+@blackish: #ffffff;
+@silabsred: #D91E2A;
+@silabsmedgrey: #555555;
+@silabslightgrey: #B2B2B2;
+@silabssuperlightgrey: #EFEFEF;
+
+html, body {
+	background-color: @silabssuperlightgrey;
+}
+
+.application {
+	background-color: @silabssuperlightgrey;
+}
+
+.control-panel {
+	.header {
+		margin: 0px;
+
+		img.logo {
+			vertical-align: top;
+			width: 100px;
+			padding: 10px;
+
+		}
+		img.threadlogo{
+			vertical-align: top;
+			width: 150px;
+			padding-top:22px;
+			padding-left: 5px;
+		}
+		.title {
+			display: inline-block;
+			margin-left: 10px;
+			margin-top: 0;
+			padding-top: 31px;
+			vertical-align: top;
+		}
+	}
+}
+
+.device-list {
+	.item {
+		position: relative;
+		.remove-item {
+			position: absolute;
+			right: 0;
+			top: 10px;
+		}
+	}
+}
+
+.silabsicon {
+	-webkit-user-select: none !important;
+   -moz-user-select: none !important;
+   -ms-user-select: none !important;
+   user-select: none !important;
+   cursor: default !important;
+}
+
+.toggle-button {
+	padding: 3px !important;
+}
+
+.toggle-button-nopadding {
+	padding: 0px !important;
+}
+
+.silabsiconbuttons {
+	padding: 5px !important;
+	margin-top: 3px !important;
+	margin-right: 7px !important;
+	background-color: @silabsmedgrey !important;
+	box-shadow: 0px 0px 0px 1px @silabslightgrey inset !important;
+	-webkit-box-shadow: 0px 0px 0px 1px #B2B2B2 !important;
+	color: #silabssuperlightgrey;
+}
+
+.redsilabsiconbuttons {
+	padding: 5px !important;
+	margin-top: 3px !important;
+	margin-right: 7px !important;
+	background-color: @silabsmedgrey !important;
+	box-shadow: 0px 0px 0px 1px @silabslightgrey inset !important;
+	-webkit-box-shadow: 0px 0px 0px 1px #B2B2B2 !important;
+	color: #D91E2A;
+}
+
+.silabssmalltext {
+	padding: 0px !important;
+	margin-top: 4px !important;
+	margin-right: 7px !important;
+	font-size: 10pt !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  cursor: default !important;
+}
+
+.silabsextendedbuttons {
+	padding: 3px !important;
+	background-color: @silabsmedgrey !important;
+	box-shadow: 0px 0px 0px 1px @silabslightgrey inset !important;
+	color: #silabssuperlightgrey !important;
+}
+
+.silabsglobal {
+	background-color: @silabsmedgrey !important;
+	box-shadow: 0px 0px 0px 1px @silabslightgrey inset !important;
+	-webkit-box-shadow: 0px 0px 0px 1px #B2B2B2 !important;
+	color: #silabssuperlightgrey !important;
+}
+
+.silabsmedgrey {
+	padding: 3px !important;
+	background-color: @silabsmedgrey !important;
+	box-shadow: 0px 0px 0px 1px @silabslightgrey inset !important;
+	color: #silabssuperlightgrey !important;
+}
+
+.ui-input {
+	font-size: 10pt !important;
+}
+
+.adding-rule {
+  opacity: 1;
+	-webkit-transition: opacity 0.5s;
+	transition: opacity 0.5s;
+}
+
+.hidden-rule {
+	opacity: 0;
+}
+
+.appearing-button {
+	opacity: 1;
+	-webkit-transition: opacity 0.5s;
+	transition: opacity 0.5s;
+}
+
+.hidden {
+	display: none !important;
+}
+
+.innerdiv {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.customheader {
+			display: inline-block;
+}
+
+.logoutput {
+	white-space: pre-wrap;
+}
+
+.extended-enter {
+  transition: 1s;
+  left: 0;
+	animation: mymove 5s infinite;
+}
+
+.extended-enter.extended-enter-active {
+  opacity: 1;
+}
+
+.extended-leave {
+  opacity: 1;
+  transition: opacity .2s ease-in;
+}
+
+.extended-leave.extended-leave-active {
+  opacity: 0.01;
+}

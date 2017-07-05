@@ -1,0 +1,21 @@
+Thread Border Router Release Notes
+
+1.0.0
+-----
+
+This release tracks with the Thread Stack version 2.3 and addresses features
+and errata not included in the Thread release notes, QSG102 or UG116.
+
+New Features
+
+This release includes an NCP image for the EFR32 wireless starter kit as 
+described in QSG102 rev 0.4. To use this NCP device with the border-router
+modify /opt/siliconlabs/threadborderrouter/bin/silabs-scripts to update the
+NCP_DEVICE value as follows:  NCP_DEVICE="/dev/ttyACM0"
+
+This release will use commissioning by default. Obtain the Thread commissioning
+app from the Google Play store for Android devices. This is described in
+sections 7 and 8 in QSG102. To precommission a network use the steps described
+in section 3.2.1 of UG116.
+
+This release supports NAT64, DNS64 and prefix delegation.

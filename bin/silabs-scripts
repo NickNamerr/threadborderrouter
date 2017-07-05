@@ -1,0 +1,207 @@
+#!/bin/bash
+
+# find and include the silabsenv file
+SILABSENV=`which silabsenv`
+. "${SILABSENV:-/opt/siliconlabs/threadborderrouter/bin/silabsenv}"
+
+usage() {
+  echo "$0 Helper script to start Silicon Labs Thread Border Router binaries"
+  echo "$0 [-i|-c|-b] <fg|bg>"
+  echo "$0 -i <bg|fg>     start the ip-modem-app in the <background or foreground>"
+  echo "$0 -c <bg|fg>     start the commission-proxy-app in the <background or foreground>"
+  echo "$0 -b <bg|fg>     start the border-router-mgmt-app in the <background or foreground>"
+}
+
+log_stop () {
+    echo "`date -u` Stopped by init.d" >> $1
+}
+
+log_start () {
+    echo "`date -u` Started by init.d" >> $1
+}
+
+start_ip_driver () {
+    modprobe cp210x
+    echo "10c4 8a5e" > /sys/bus/usb-serial/drivers/cp210x/new_id
+
+    if [ $1 ] && [ $1 = "-fg" ]
+    then
+      ${IPCMD} 
+    else
+      nohup ${IPCMD} 2>&1 | add_date >> ${LOG_DIR}/${IPAPP} 2>&1 &
+    fi
+    sleep 5
+    true
+}
+
+stop_ip_driver() {
+    kill -9 `pidof ${IPAPP}`
+}
+
+start_border_router () {
+
+    if [ $1 ] && [ $1 = "-fg" ]
+    then
+      ${BRCMD} 
+    else
+      nohup tail -f /dev/null 2>&1 | nohup ${BRCMD} 2>&1 | add_date >> ${LOG_DIR}/${BRAPP} 2>&1 & 
+    fi
+    sleep 3
+
+    #ensure ndppd is not already running
+    kill -9 `pidof ndppd` > /dev/null 2>&1
+
+    #restart ndppd as a daemon
+    ${NDPPD} -d
+
+    #add a multicast route for ALL_THREAD_NODES to the local routing table
+    #this allows applications to send multicasts through border-router-mgmt-app
+    #TODO: update router advertisement to show routes to connected devices
+    sudo ip -6 route add ff33::/16 dev tun0 table local metric 10
+    sudo ip -6 route add ff03::/16 dev tun0 table local metric 10
+     
+    true
+}
+
+stop_border_router() {
+    kill -9 `pidof ${BRAPP}`
+
+    #ndppd should not be running if the mesh is down
+    kill -9 `pidof ndppd`
+}
+
+start_commission_proxy_app () {
+
+  #ensure avahi-publish isn't already running...
+  killall avahi-publish > /dev/null 2>&1
+  
+  if [ $1 ] && [ $1 = "-fg" ]
+  then
+    ${CPCMD} 
+  else
+    nohup tail -f /dev/null 2>&1 | nohup ${CPCMD} 2>&1 | add_date >> ${LOG_DIR}/${CPAPP} 2>&1 &
+  fi
+  sleep 3
+  true
+}
+
+stop_commission_proxy_app() {
+    kill -9 `pidof ${CPAPP}`
+}
+
+print_usage=0
+exit_var=0
+
+if [ "$#" -lt 1 ]; then
+  print_usage=1
+  exit_var=4
+else
+  while [[ $# -ge 1 ]]
+  do
+   key="$1"
+   case $key in
+      -b|--border-router-mgmt-app)
+       BORDER_ROUTER=$2
+       if [ "$#" -ge 2 ]; then
+         shift 2 # past argument
+       else
+         shift $#
+       fi
+      ;;
+      -c|--commission-proxy-app)
+       COMMISSION_PROXY_APP=$2
+       if [ "$#" -ge 2 ]; then
+         shift 2 # past argument
+       else
+         shift $#
+       fi
+      ;;
+      -i|--ip-driver-app)
+       IP_DRIVER_APP=$2
+       if [ "$#" -ge 2 ]; then
+         shift 2 # past argument
+       else
+         shift $#
+       fi
+      ;;
+      *)
+        echo "ERROR: unknown parameter: $key" >&2
+        shift # past argument
+        print_usage=1
+        exit_var=3
+      ;;
+   esac
+  done
+fi
+
+if [ -n "$IP_DRIVER_APP" ]; then
+ case $IP_DRIVER_APP in
+   stop)
+     stop_border_router
+     log_stop ${LOG_DIR}/${BRAPP}
+     stop_commission_proxy_app
+     log_stop ${LOG_DIR}/${CPAPP}
+     stop_ip_driver
+     log_stop ${LOG_DIR}/${IPAPP}
+     ;;
+   fg)
+     start_ip_driver "-fg"
+     ;;
+   bg)
+     log_start ${LOG_DIR}/${IPAPP}
+     start_ip_driver "-bg"
+     ;;
+   *)
+     echo "ip driver app unknown param [${IP_DRIVER_APP}]"
+     print_usage=1
+     exit_var=3
+     ;;
+ esac
+fi
+if [ -n "$COMMISSION_PROXY_APP" ]; then
+ case $COMMISSION_PROXY_APP in
+   stop)
+     stop_commission_proxy_app
+     log_stop ${LOG_DIR}/${CPAPP}
+     ;;
+   fg)
+     start_commission_proxy_app "-fg"
+     ;;
+   bg)
+     log_start ${LOG_DIR}/${CPAPP}
+     start_commission_proxy_app "-bg"
+     ;;
+   *)
+     echo "thread comm app unknown param [${COMMISSION_PROXY_APP}]"
+     print_usage=1
+     exit_var=3
+     ;;
+ esac
+fi
+
+if [ -n "$BORDER_ROUTER" ]; then
+ case $BORDER_ROUTER in
+   stop)
+     stop_border_router
+     log_stop ${LOG_DIR}/${BRAPP}
+     ;;
+   fg)
+     start_border_router "-fg"
+     ;;
+   bg)
+     log_start ${LOG_DIR}/${BRAPP}
+     start_border_router "-bg"
+     ;;
+   *)
+     echo "ip driver app unknown param [${BORDER_ROUTER}]"
+     print_usage=1
+     exit_var=3
+     ;;
+ esac
+fi
+
+if [ $print_usage -eq 1 ]; then
+  usage
+fi
+
+exit $exit_var

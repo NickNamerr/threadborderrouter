@@ -1,0 +1,165 @@
+#!/bin/bash
+
+BR_CONF_FILE="/etc/siliconlabs/border-router.conf"
+
+#the silabs home directory
+SILABS_BORDER_ROUTER_ROOT="/opt/siliconlabs/threadborderrouter"
+
+#the exedir contains all silabs IOTS executables/scripts
+EXEDIR="${SILABS_BORDER_ROUTER_ROOT}/bin"
+
+#some defaults to use if prefix delegation is not enabled/available
+DEFAULT_HOST_PREFIX="2001:db8:8569:b2b1::"
+DEFAULT_HOST_ADDRESS="${DEFAULT_HOST_PREFIX}1"
+DEFAULT_MESH_PREFIX="2001:db8:385:9318::"
+DEFAULT_HOST_SUBNET_WIDTH="64"
+DEFAULT_NAT64_PREFIX="fc01:6464::"
+
+#the ncp device is the /dev endpoint of the ncp
+NCP_DEVICE="/dev/ttyUSB0"
+
+
+#tun0 provides an interface into the linux IP stack through which the NCP delivers thread traffic
+NCP_TUN="tun0"
+
+#the mgmt port is what internal apps use to connect to ip-driver-app
+MGMT_PORT=4901
+
+#the comm port is what internal apps use to connect to commission-proxy-app
+COMM_PORT=8888
+
+#the commissioner port is what external commissioning applications use to connect to thread-comm-app
+COMMISSIONER_PORT=49191
+
+LOG_DIR=/var/log/siliconlabs
+
+#helpers for the silicon labs ip driver application
+IPAPP="ip-driver-app"
+IPCMD="${EXEDIR}/${IPAPP} -u ${NCP_DEVICE} -t ${NCP_TUN} -m ${MGMT_PORT} -c ${COMM_PORT}"
+
+#helpers for the silicon laboratories border router application
+BRAPP="border-router-mgmt-app"
+BRCMD="${EXEDIR}/${BRAPP} -m ${MGMT_PORT}"
+NDPPD=/usr/local/sbin/ndppd
+
+#helpers for the silicon laboratories commissioning application
+CPAPP="commission-proxy-app"
+CPCMD="${EXEDIR}/${CPAPP} --port ${COMMISSIONER_PORT} --mgmt_port ${COMM_PORT} --log security --log commission --log coap --log ip_modem --log drop"
+
+#appends a date to the beginning of each line
+add_date() {
+  while IFS= read -r line; do
+    echo "`date "+<%H:%M:%S>"` $line"
+  done
+}
+
+get_standard_subnet() {
+  #vars $1 = subnet to standardize
+  echo $(sipcalc $1 | grep -F "Subnet" | cut -d '-' -f 2)
+}
+
+get_compressed_address() {
+  #vars $1 = subnet to extract an 'address' from
+  echo $(sipcalc $1 | grep -F "Compressed" | cut -d '-' -f 2)
+}
+get_prefix_length() {
+  #vars $1 = subnet to extract an 'address' from
+  echo $(sipcalc $1 | grep -F "Prefix length" | cut -d '-' -f 2)
+}
+
+get_conf_entry() {
+  #vars $1 = conf keyword to search
+  local TEMP=$(sed -n "/^\s*#/! s|\s*$1\s*\(.*\)$|\1|p" $BR_CONF_FILE | uniq)
+  echo $TEMP | tr -d '[:space:]'
+}
+
+add_conf_entry() {
+  #vars  $1 = key to add
+  #      $2 = value string to add
+  #if $2 exists in $BR_CONF_FILE, modify the entry, otherwise add a new entry
+  grep -q '^\s*$1' $BR_CONF_FILE && sed -i.old '/^\s*#/! s/^\s*$1.*/$1 $2' $BR_CONF_FILE || echo "$1 $2" >> $BR_CONF_FILE
+  mv "$BR_CONF_FILE.old" ".$BR_CONF_FILE.old"
+}
+
+remove_conf_entry() {
+  #vars  $1 = key to find and remove
+  # delete all noncomment lines starting with $1
+  sed -i.old '/^\s*$1.*$/d' $BR_CONF_FILE
+  mv "$BR_CONF_FILE.old" ".$BR_CONF_FILE.old"
+}
+
+get_subnet_from_conf() {
+  #vars $1= conf subnet to search
+  echo $(get_standard_subnet `get_conf_entry $1`)
+}
+
+modify_conf_entry() {
+ #vars $1 = key to modify
+ #     $2 = new value
+ sed -i.old "/^\s*#/! s|^\s*\($1\)\s*.*$|\1 $2|" $BR_CONF_FILE
+}
+
+update_dhcpd6_conf() {
+  # generate a dhcpd6.conf file to hand out dhcpv6 addresses from prefix-delegation
+  # args:  $1 the host address (IPV6_PREFIX:IPV6_SUFFIX/IPV6_SUBNET_WIDTH)
+  #        $2 the host prefix only (IPV6_PREFIX::)
+  #        $3 the host subnet width in bits
+  if [ -n "$1" ] && [ -n "$2" ] && [ -n "$3" ]; then
+    echo "Updating dhcpd6.conf to: |$1|$2|$3|" >> /var/log/siliconlabs/silabsenv
+    sed "/^\s*#/! s|\(.*\)HOST_ADDRESS\(.*\)$|\1$1\2|g" /etc/dhcp/dhcpd6.conf.template | 
+    sed -e "/^\s*#/! s|HOST_PREFIX[:]*|$2|g" | 
+    sed -e "/^\s*#/! s|/HOST_SUBNET_WIDTH|/$3|g" > /etc/dhcp/dhcpd6.conf
+  else
+    echo "update_dhcpd6_conf call failed with input [$1|$2|$3]" >> /var/log/siliconlabs/silabsenv
+  fi
+}
+
+update_radvd_conf() {
+  # generates a radvd.conf file to enable router advertisement
+  # args:  $1 the host address to send router advertisements on
+  if [ -n "$1" ]; then
+    echo "Updating radvd.conf to: |$1|" >> /var/log/siliconlabs/silabsenv
+    sed "/^\s*#/! s|HOST_PREFIX[:]*|$1|g" /etc/radvd.conf.template > /etc/radvd.conf
+  else
+    echo "update_radvd_conf call failed with |$1|" >> /var/log/siliconlabs/silabsenv
+  fi
+}
+
+update_ndppd_conf() {
+  # generates an ndppd.conf to enable proxying the MESH_PREFIX on behalf of the thread mesh
+  # args:  $1 the mesh prefix to proxy NDP for
+  if [ -n "$1" ]; then
+    echo "Updating ndppd.conf to: |$1|" >> /var/log/siliconlabs/silabsenv
+    sed "/^\s*#/! s|MESH_PREFIX[:]*/[0-9]*|$1/64|" /etc/ndppd.conf.template > /etc/ndppd.conf
+  else
+    echo "update_ndppd_conf failed with |$1|" >> /var/log/siliconlabs/silabsenv
+  fi
+}
+
+update_bind_named_conf_options() {
+  # generates a named.conf.options for managing DNS64
+  # args:  $1 the ipv6 prefix that dns64 will be mapped to
+  #        $2 the prefix for ipv6 hosts to perform dns64 for
+  #        $3 the mesh prefix to perform dns64 for
+  if [ -n "$1" ] && [ -n "$2" ] && [ -n "$3" ]; then
+    echo "Updating ndppd.conf to: |$1|$2|$3|" >> /var/log/siliconlabs/silabsenv
+    sed "/^\s*#/! s|NAT64_PREFIX[:]*|$1|g" /etc/bind/named.conf.options.template |
+    sed -e "/^\s*#/! s|HOST_PREFIX[:]*|$2|g" | 
+    sed -e "/^\s*#/! s|MESH_PREFIX[:]*|$3|g" > /etc/bind/named.conf.options 
+  else
+    echo "update_bind_named_conf_options failed with |$1|$2|$3|" >> /var/log/siliconlabs/silabsenv
+  fi
+}
+
+update_tayga_default() {
+  # generates an /etc/defaults/tayga for configuring NAT64
+  # args:  $1 the nat64 prefix
+  #        $2 the hostap prefix that the NAT64 daemon will have an address on  
+  if [ -n "$1" ] && [ -n "$2" ]; then
+    echo "Updating tayga.conf to: |$1|$2|" >> /var/log/siliconlabs/silabsenv
+    sed "/^\s*#/! s|HOST_PREFIX[:]*|$2|g" /etc/tayga.conf.template | 
+    sed -e "/^\s*#/! s|NAT64_PREFIX[:]*|$1|g" > /etc/tayga.conf 
+  else
+    echo "update_tayga_default failed with |$1|$2|" >> /var/log/siliconlabs/silabsenv
+  fi
+}

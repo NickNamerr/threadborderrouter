@@ -1,0 +1,69 @@
+# Defaults for tayga initscript
+# sourced by /etc/init.d/tayga
+# installed at /etc/default/tayga by the maintainer scripts
+
+# SILABS_BORDER_ROUTER_DOCUMENTATION
+# The silabs-border-router package runs tayga to provide
+# a NAT64 service and requires this setting to be enabled
+
+# If your application does not require a NAT64 transition
+# technology to enable Thread devices to communicate
+# with IPv4-only cloud server addresses, this setting
+# can be set to "no."
+# SILABS_BORDER_ROUTER_DOCUMENTATION
+RUN="yes"
+
+# SILABS_BORDER_ROUTER_DOCUMENTATION
+# The silabs-border-router package does not manually
+# configure the interface and routing tables, 
+# this option causes the tayga daemon to configure
+# the nat64 tunnel.
+#
+# If your application requires manual configuration
+# of the nat64 tunnel or routing tables, 
+# this opton should be set to "no"
+# SILABS_BORDER_ROUTER_DOCUMENTATION
+CONFIGURE_IFACE="yes"
+
+# SILABS_BORDER_ROUTER_DOCUMENTATION
+# The silabs-border-router package configures iptables
+# to manually remap UDP to the ephermeral ports 1024-65500 
+# to avoid collision with local UDP services.
+#
+# If this value is set to "yes," tayga will add a new
+# MASQUERADE rule that may allow port collisions to occur
+#
+# If your application does not require modification of
+# the NAT44 table, this option can be safely reconfugured or omitted.
+# SILABS_BORDER_ROUTER_DOCUMENTATION
+CONFIGURE_NAT44="no"
+
+# SILABS_BORDER_ROUTER_DOCUMENTATION
+# The silabs-border-router package does not install
+# any additional daemon options.  Because these options
+# are un-needed by the default reference, they are
+# unused and un-tested.  Enabling additional daemon options
+# may result in NAT64 failure.
+# SILABS_BORDER_ROUTER_DOCUMENTATION
+DAEMON_OPTS=""
+
+# SILABS_BORDER_ROUTER_DOCUMENTATION
+# The *_TUN_ADDR below are the 'host' addresses that will be automatically 
+# assigned to the nat64 tunnel interface. These addresses are used when
+# traffic originating on the host needs to utilize the NAT64.
+#
+# The IPV6_TUN_ADDR must not exist within the NAT64_PREFIX and cannot match
+# Tayga's 'ipv6-addr' assigned in /etc/tayga.conf.
+#
+# The addresses in /etc/tayga.conf represent a virtual 'router' that 
+# tayga maintains.  If the IPV6_TUN_ADDR is set to equal ipv6-addr, 
+# packets originating from the host will be interpreted as tayga management
+# traffic and will not pass through the NAT.
+#
+# SILABS_BORDER_ROUTER_DOCUMENTATION
+
+# IPv4 address to assign to the NAT64 tunnel device
+IPV4_TUN_ADDR="192.168.64.1"
+
+# IPv6 address to assign to the NAT64 tunnel device
+IPV6_TUN_ADDR="fc01:c0a8:4001::2/64"

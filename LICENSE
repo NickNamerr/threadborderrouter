@@ -1,0 +1,381 @@
+CAREFULLY READ THE TERMS AND CONDITIONS OF THIS AGREEMENT.  DOWNLOADING,
+INSTALLING, COPYING OR OTHERWISE USING THE SOFTWARE IN ANY WAY, INDICATES YOUR
+AGREEMENT TO BE UNCONDITIONALLY BOUND BY THE TERMS OF THIS LICENSE AGREEMENT.
+IF YOU DO NOT AGREE TO ALL OF THE TERMS OF THIS AGREEMENT, DO NOT INSTALL OR USE
+THE SOFTWARE.
+
+Border Router SOFTWARE LICENSE
+
+This Software License Agreement (this "Agreement") is entered into by the
+Licensee and Silicon Laboratories Inc., located at 400 W. Cesar Chavez, Austin,
+TX  78701 and Silicon Laboratories International Pte Ltd., located at No. 6
+Serangoon North Avenue 5, #06-01, Singapore 554910 (collectively "Silicon
+Labs"). Silicon Labs is willing to grant Licensee a license to use this Software
+only upon Licensee's acceptance of the terms and conditions set forth below.
+
+1. DEFINITIONS
+
+1.1. "Licensed Materials" means Silicon Labs Software which is Border Router
+software for permitting the connection of one communication network to another
+communication network.
+
+1.3. "Licensee" means the individual or, in the case of an individual working on
+behalf of his or her employer, the employer of the individual who accepts the
+terms of this Software License by downloading and installing the Silicon Labs
+Software.  Use of the Silicon Labs Software constitutes an acceptance of the
+term of this Agreement.
+
+1.4. "Licensee Product" means an application using the Licensed Materials
+developed by Licensee, or for Licensee by a third party, and which incorporates
+one or more Silicon Labs integrated circuits to provide a product sold or leased
+by Licensee under Licensee's tradename.
+
+1.5. "Silicon Labs Software" means the software program downloaded by Licensee
+and any Updates, Upgrades or New Versions of each of these programs. Silicon
+Labs Software includes source code of Web Server software and source code of
+border router application software, and all related algorithms therein.
+
+1.6  "Open Source Software" means, without limitation, a software license that
+requires as a condition of use, modification, and/or distribution of such
+software that such software or other software incorporated into, derived from or
+distributed with such software be (a) disclosed or distributed in source code
+form; (b) be licensed for the purpose of making derivative works; or (c) be
+redistributable at no charge.
+
+1.7. "Unauthorized Use" means any use of the Silicon Labs Software and/or
+Derivative Works in violation of Section 2.
+
+1.8. "Update" means a new release of Silicon Labs Software that provides
+additional functionality.
+
+1.9. "Upgrade" means a bug fix, workaround, or patch to correct any reproducible
+error in Silicon Labs Software.
+
+
+2. LICENSES GRANTED
+
+2.1. Scope of License. Subject to the terms and conditions of this Agreement,
+Silicon Labs hereby grants to Licensee a personal, limited, non-exclusive, non-
+transferable (except as provided in Section 8.7 (Assignment)), worldwide,
+royalty-free, license to the Licensed Materials solely to download, store and
+execute the Licensed Materials on one or more computers owned and controlled by
+Licensee for use only by Licensee.
+
+2.2. Modifications to the source code of the Silicon Labs Software are permitted
+for use by Licensee to compile into binary executables to be used solely in
+Licensee end products having a Silicon Labs Thread product.  Licensee shall own
+only its modifications to the source code of the Silicon Labs Software subject
+to the underlying Silicon Labs rights in the original source code.  No Licensee
+modifications may contain, use or incorporate any portion of any Open Source
+Software or free software.  Violation of this license restriction is a material
+breach of this Agreement.
+
+2.3. Licensee may distribute and otherwise transfer the Silicon Labs Software to
+any third party, in whole or in part, but for use solely in Licensee end
+products having a Silicon Labs Thread product.
+
+2.4. Licensee shall not sublicense, sell, assign, rent, lease or use any portion
+of the Silicon Labs Software.
+
+2.5. For all Silicon Labs Software provided in object code form only, Licensee
+shall not reverse engineer, reverse compile/decompile, modify, dissemble,
+translate, or make any attempt (or encourage any third party to attempt) to
+discover the source code of any portion of the Silicon Labs Software provided as
+object code.
+
+2.6. Unauthorized Use.  Licensee shall be responsible for any Unauthorized Uses
+by Licensee's contract manufacturer, and any Unauthorized Use by such contract
+manufacturer, with or without the knowledge of Licensee, shall be attributed to
+Licensee.
+
+2.7. No Other Licenses. The licenses granted under this Agreement are
+specifically set forth herein, and no licenses are granted by Silicon Labs to
+Licensee by implication or estoppel, and no licenses shall be granted by the
+parties' course of doing business.
+
+2.8. License Fee and Royalties.  Licensee is not obligated to pay any license
+fees or royalties to Silicon Labs so long as Licensee complies with the terms of
+the licenses set forth herein.
+
+
+3. OWNERSHIP OF LICENSED MATERIALS
+
+3.1. Ownership.  Silicon Labs retains all title and ownership of all proprietary
+rights, including but not limited to any and all intellectual property and moral
+rights, to the Licensed Materials. Nothing set out in this Agreement shall be
+construed to constitute a sale of the title, ownership or proprietary rights
+with respect to the Licensed Materials. Except as expressly set forth herein, no
+license to any intellectual property is granted. Licensee shall not file any
+patents related to its use of, or improvements to, the Licensed Materials.  If
+Licensee has filed or in the future files any patents that would have the effect
+of causing the Licensed Materials to infringe such patents, Licensee shall grant
+to Silicon Labs an unlimited, worldwide, non-exclusive, royalty-free, perpetual
+license to use the covered invention for any purpose.
+
+3.2. Proprietary Rights Notices. Licensee agrees that it will not remove, alter
+or otherwise obscure any proprietary rights notices appearing in the Silicon
+Labs Materials.
+
+3.3. U.S. Government Restricted Rights Legend. All Silicon Labs technical data
+and computer software is commercial in nature and developed solely at private
+expense.  Software is delivered as Commercial Computer Software as defined in
+DFARS 252.227-7014 (June 1995) or as a commercial item as defined in FAR
+2.101(a) and as such is provided with only such rights as are provided in
+Silicon Labs' standard commercial license for such software.  Technical data is
+provided with limited rights only as provided in DFARS 252.227-7015 (Nov. 1995)
+or FAR 52.227-14 (June 1987), whichever is applicable. Licensee will: (a)
+identify and license the software developed by Licensee hereunder in all
+proposals and agreements with the United States Government or any contractor
+therefor; and (b) legend or mark such software provided pursuant to any
+agreement with the United States Government or any contractor therefor in a form
+sufficient to obtain for Silicon Labs and its suppliers the protection intended
+by this Section 9.3 (U.S. Government Restricted Rights Legend). Licensee agrees
+not to remove or deface any portion of any legend on any software or
+documentation delivered to it under this Agreement.
+
+
+4. LIMITED WARRANTY AND LIMITED LIABILITY
+
+4.1. Limited Warranty. THE SILICON LABS SOFTWARE IS PROVIDED "AS IS".  SILICON
+LABS MAKES NO WARRANTIES, EXPRESS, IMPLIED OR STATUTORY, AS TO ANY MATTER
+WHATSOEVER. IN PARTICULAR, ANY AND ALL WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE, ACCURACY, SATISFACTORY QUALITY, NON-INFRINGEMENT,
+COURSE OF DEALING OR COURSE OF PERFORMANCE ARE EXPRESSLY EXCLUDED.  Silicon Labs
+disclaims all responsibility for the accuracy or reliability of the Silicon Labs
+Software and does not warrant that it will meet the user's requirements, be
+uninterrupted or error-free, or that any defect in the software will be
+corrected.  Licensee assumes the entire risk arising out of use or performance
+of the Silicon Labs Software provided herewith.
+
+4.2. Limited Liability.  IN NO EVENT SHALL SILICON LABS HAVE ANY LIABILITY TO
+LICENSEE OR ANY THIRD PARTY FOR INCIDENTAL, CONSEQUENTIAL, INDIRECT, SPECIAL OR
+PUNITIVE DAMAGES OF ANY KIND OR FOR LOSS OF REVENUE, LOSS OF BUSINESS, OR OTHER
+FINANCIAL LOSS ARISING OUT OF OR IN CONNECTION WITH THIS AGREEMENT, REGARDLESS
+OF THE FORM OF THE ACTION, WHETHER IN CONTRACT, TORT (INCLUDING NEGLIGENCE),
+STRICT PRODUCT LIABILITY OR OTHERWISE, EVEN IF ADVISED OF THE POSSIBILITY OF
+SUCH DAMAGES AND EVEN IF ANY LIMITED REMEDY SPECIFIED IN THIS AGREEMENT IS
+DEEMED TO HAVE FAILED OF ITS ESSENTIAL PURPOSE.  IN NO EVENT SHALL SILICON LABS'
+TOTAL LIABILITY UNDER THIS AGREEMENT EXCEED THE AMOUNTS PAID BY LICENSEE TO
+SILICON LABS UNDER THIS AGREEMENT.
+
+4.3. Licensee Product Warranty. Licensee shall be solely responsible for
+customer warranties of any and all products manufactured by Licensee pursuant to
+this Agreement.
+
+4.4. Regulatory Compliance.  Silicon Labs does not warrant that Silicon Labs
+Software or any Licensee Product will comply with the regulatory requirements of
+the United States or any other country.  Licensee is solely responsible for
+complying with such requirements and for obtaining necessary government
+certifications, if any.
+
+5. CONFIDENTIALITY
+
+5.1. "Confidential Information" means that information of either party
+("Disclosing Party") which is disclosed to the other party ("Receiving Party")
+pursuant to this Agreement, in written form and marked "Confidential,"
+"Proprietary" or similar designation, or if disclosed orally, the Disclosing
+Party shall indicate that such information is confidential at the time of
+disclosure and send a written summary of such information to the Receiving Party
+within thirty (30) days of disclosure and mark such summary "Confidential."
+Confidential Information shall include, but not be limited to, trade secrets,
+know-how, inventions, techniques, processes, algorithms, software programs,
+schematics, designs, contracts, customer lists, financial information, product
+plans, sales and marketing plans, business information and the terms of this
+Agreement.  References to a Receiving Party or a Disclosing Party shall also
+include all present and future subsidiary and parent companies of such party,
+subject to the restrictions contained in this Agreement.
+
+5.2. Confidential Information. Each party acknowledges that in the course of the
+performance of this Agreement, it may obtain the Confidential Information of the
+other party.  The Receiving Party shall, at all times, both during the term of
+this Agreement and thereafter for a period of five (5) years keep in confidence
+and trust all of the Disclosing Party's Confidential Information received by it
+(except for any source code, which shall be kept in confidence and trust in
+perpetuity).  The Receiving Party shall not use the Confidential Information of
+the Disclosing Party other than as expressly permitted under the terms of this
+Agreement.  The Receiving Party shall take reasonable steps to prevent
+unauthorized disclosure or use of the Disclosing Party's Confidential
+Information and to prevent it from falling into the public domain or into the
+possession of unauthorized persons.  The Receiving Party shall not disclose
+Confidential Information of the Disclosing Party to any person or entity other
+than its officers, employees, contractors, and consultants who need access to
+such Confidential Information in order to effect the intent of this Agreement
+and who have entered into confidentiality agreements which protect the
+Confidential Information of the Disclosing Party sufficient to enable the
+Receiving Party to comply with this Agreement.  The Receiving Party shall
+immediately give notice to the Disclosing Party of any unauthorized use or
+disclosure of Disclosing Party's Confidential Information. The Receiving Party
+agrees to assist the Disclosing Party to remedy such unauthorized use or
+disclosure of its Confidential Information.
+
+5.3. Exceptions to Confidential Information. The confidentiality obligations set
+forth in this Agreement shall not apply to information which is: (a) now or
+hereafter, through no unauthorized act or failure to act on the Receiving
+Party's part, in the public domain; (b) known to the Receiving Party without an
+obligation of confidentiality at the time the Receiving Party receives the same
+from the Disclosing Party, as evidenced by written records; (c) hereafter
+furnished to the Receiving Party by a third party as a matter of right and
+without restriction on disclosure; or (d) independently developed by the
+Receiving Party without use of the Disclosing Party's Confidential Information.
+Nothing in this Agreement shall prevent the Receiving Party from disclosing
+Confidential Information to the extent the Receiving Party is legally compelled
+to do so by any governmental investigative or judicial agency pursuant to
+proceedings over which such agency has jurisdiction; provided, however, that
+prior to any such disclosure, the Receiving Party shall: (i) assert the
+confidential nature of the Confidential Information to the agency; (ii)
+immediately notify the Disclosing Party in writing of the agency's order or
+request to disclose; and (iii) cooperate fully with the Disclosing Party in
+protecting against any such disclosure and/or obtaining a protective order
+narrowing the scope of the compelled disclosure and protecting its
+confidentiality.
+
+6. COMPLIANCE WITH LAW
+
+6.1. Laws Generally. Licensee agrees to comply with all applicable laws, rules,
+and regulations in connection with its activities under this Agreement.
+
+6.2. Export Regulations. Neither party shall export, directly or indirectly, any
+technical data or software acquired under this Agreement or the direct product
+of any such technical data or software to any country for which the United
+States Government or any agency thereof, at the time of export, requires an
+export license or other government approval, without first obtaining such
+license or approval. With respect to any export transactions under this
+Agreement, both parties will cooperate in any reasonable manner to effect
+compliance with all applicable export regulations.
+
+7. TERM AND TERMINATION
+
+7.1. Term. This Agreement and the licenses granted herein shall be perpetual,
+unless earlier terminated in accordance with its terms.
+
+7.2. Right to Terminate. Either party shall have the right to terminate this
+Agreement if the other party is in material breach of any term or condition of
+this Agreement and fails to remedy such breach within thirty (30) days after
+receipt of written notice of such breach given by the non-breaching party.
+Silicon Labs also has the right to terminate this license immediately if it has
+a reasonable apprehension that the Licensed Materials or their use may (a)
+infringe upon the intellectual property of another; (b) subject Licensee or
+Silicon Labs to potential liability or damages, (c) violate any law or
+regulation; or (d) Licensee, or someone on Licensee's behalf, has filed or
+intends to file a lawsuit or claim against Silicon Labs.
+
+7.3. Effect of Termination.  Upon the termination or expiration of this
+Agreement: (a) the licenses and other provisions of this Agreement shall be
+terminated; (b) Licensee shall immediately cease reproducing and using any
+Licensed Materials; and (c) Licensee shall, within fifteen (15) days of receipt
+of a written request by Silicon Labs to do so, return to Silicon Labs or destroy
+all full or partial copies, in whatever media, of any and all Licensed Materials
+in Licensee's possession and Licensee shall warrant in writing to Silicon Labs
+within thirty (30) days after termination or expiration that all such materials
+have been returned or destroyed. If this Agreement is terminated for any reason
+other than Licensee's uncured material breach of its terms, the licenses granted
+hereunder shall be revoked and all use of the Licensed Materials shall cease
+upon the effective date of termination.
+
+7.4. Survival.  Neither the termination nor expiration of this Agreement shall
+relieve either party from its obligations to pay the other any sums accrued
+hereunder. The parties agree that their respective rights, obligations and
+duties under Sections 2.6 (Unauthorized Uses), Article 3 (Ownership), Section
+4.2 (Limited Liability), Articles 5 (Confidentiality), 6 (Compliance with Law),
+7 (Term and Termination), and 8 (Miscellaneous), as well as any rights,
+obligations and duties which by their nature extend beyond the termination or
+expiration of this Agreement shall survive any termination or expiration of this
+Agreement.
+
+7.5. No Damages For Termination or Expiration. SILICON LABS SHALL NOT BE LIABLE
+TO LICENSEE FOR DAMAGES OF ANY KIND, INCLUDING INCIDENTAL OR CONSEQUENTIAL
+DAMAGES, ON ACCOUNT OF THE TERMINATION OR EXPIRATION OF THIS AGREEMENT IN
+ACCORDANCE WITH ITS TERMS. LICENSEE WAIVES ANY RIGHT IT MAY HAVE TO RECEIVE ANY
+COMPENSATION OR REPARATIONS ON TERMINATION OR EXPIRATION OF THIS AGREEMENT UNDER
+THE LAW OF ANY TERRITORY OR OTHERWISE. Silicon Labs will not be liable to
+Licensee on account of termination or expiration of this Agreement for
+reimbursement or damages for the loss of goodwill, prospective profits or
+anticipated income, or on account of any expenditures, investments, leases or
+commitments made by Licensee or for any other reason whatsoever based upon or
+growing out of such termination or expiration. Licensee acknowledges that: (i)
+Licensee has no expectation and has received no assurances that any investment
+by Licensee in the promotion of Licensee Products will be recovered or recouped
+or that Licensee will obtain any anticipated amount of profits by virtue of this
+Agreement; and (ii) Licensee will not have or acquire by virtue of this
+Agreement or otherwise any vested, proprietary or other right in the Silicon
+Labs Trademarks or in "goodwill" thereunder.
+
+8. MISCELLANEOUS
+
+8.1. Amendment; Waiver. This Agreement may be amended or supplemented only by a
+written statement that is signed by duly authorized representatives of both
+parties. No term or provision hereof will be considered waived by either party,
+and no breach excused by either party, unless such waiver or consent is in
+writing signed on behalf of the party against whom the waiver is asserted.  No
+consent by either party to, or waiver of, a breach by either party, whether
+express or implied, will constitute a consent to, waiver of, or excuse of any
+other, different, or subsequent breach by either party.
+
+8.2. Severability. If any provision of this Agreement is held invalid or
+unenforceable for any reason, the remainder of the provision shall be amended to
+achieve as closely as possible the economic effect of the original term and all
+other provision shall continue in full force and effect.
+
+8.3. Governing Law and Language. This Agreement shall be governed by and
+construed under the laws of the United States and the State of Texas as applied
+to agreements entered into and to be performed entirely within Texas between
+Texas residents. The parties agree that the United Nations Convention on
+Contracts for the International Sale of Goods is specifically excluded from
+application to this Agreement. The English-language version of this Agreement
+controls when interpreting this Agreement.  THE PARTIES AGREE TO WAIVE THEIR
+RIGHTS TO A JURY TRIAL IN ACTIONS ARISING FROM OR RELATED TO THIS AGREEMENT.
+
+8.4. Choice of Forum. The parties hereby submit to the jurisdiction of, and
+waive any venue objections against, the United States District Court for the
+Western District of Texas, Austin Division and the Superior and Municipal Courts
+of the State of Texas, Travis County, in any litigation arising out of the
+Agreement; provided, however, that the foregoing shall not be deemed or
+construed to restrict, in any manner, a parties ability to submit patent matters
+to the U.S. International Trade Commission for resolution.
+
+8.5. Injunctive Relief. The copying, disclosure, or use of the Silicon Labs
+Software in a manner inconsistent with any provision of this Agreement or the
+improper use of the Silicon Labs Trademarks may cause irreparable injury to
+Silicon Labs for which Silicon Labs may not have an adequate remedy at law.
+Silicon Labs may be entitled to equitable relief in court, including but not
+limited to temporary restraining orders, preliminary injunctions and permanent
+injunctions.
+
+8.6. Attorneys' Fees. In any action to enforce this Agreement, the prevailing
+party shall be awarded all court costs and reasonable attorneys' fees incurred,
+including such costs and attorneys' fees incurred in enforcing and collecting
+any judgment.
+
+8.7. Assignment. Silicon Labs may assign this Agreement without restriction,
+provided the assignee agrees in writing to be bound by the terms of this
+Agreement. Licensee may not assign any rights or duties under this Agreement or
+assign this Agreement in its entirety, whether by operation of law or otherwise,
+without the prior written consent of Silicon Labs and any attempt to do so
+without such consent will be void, except pursuant to a merger, acquisition,
+sale or all assets of Licensee or other corporate reorganization with or into a
+company who agrees in writing to be bound by the terms of this Agreement.  This
+Agreement will bind and inure to the benefit of the parties and their respective
+successors and permitted assigns.
+
+8.8. Allocation of Risk. The sections on limitation of liability, warranties and
+disclaimer of warranties allocate the risks in the Agreement between the
+parties. This allocation is an essential element of the basis of the bargain
+between the parties.
+
+8.9. Entire Agreement. This Agreement constitutes the entire agreement between
+the parties relating to this subject matter and supersedes all prior or
+simultaneous representations, discussions, negotiations, and agreements, whether
+written or oral.
+
+8.10. Silicon Labs Trademarks.  Silicon Labs and Silicon Labs logo are
+trademarks of Silicon Laboratories Inc. in the United States and/or other
+countries.
+
+8.11. Silicon Labs.  If Licensee is located in the United States, the licensor
+is Silicon Laboratories Inc.  If Licensee is located outside of the United
+States, the licensor is Silicon Laboratories International Pte. Ltd.
+
+Copyright Silicon Laboratories Inc. 2015.  All Rights Reserved.
+
+Software License Version 1.1
+

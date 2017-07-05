@@ -1,0 +1,19 @@
+#!/bin/bash
+OUTFILE="$1"
+INFILE="$2"
+START_MARKER=${3-"#SILABS_AUTOGEN_START"}
+END_MARKER=${4-"#SILABS_AUTOGEN_END"}
+#replace the text between $START and $END in $1 with
+#the text in $2
+
+if grep --quiet "$START_MARKER" $1; then
+  echo "Previous conf section detected..."
+else
+  echo "Building new conf section..."
+  echo "$START_MARKER" >> $OUTFILE
+  echo "$END_MARKER" >> $OUTFILE
+fi
+  echo "Inserting $INFILE into $OUTFILE between \"$START_MARKER\" and \"$END_MARKER\""
+  sed -i.old -e"/^$START_MARKER/,/^$END_MARKER/{ /^$START_MARKER/{p; r $INFILE
+  }; /$END_MARKER/p; d; }"  $OUTFILE
+
